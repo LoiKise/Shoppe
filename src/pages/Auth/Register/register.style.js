@@ -1,7 +1,7 @@
-import { Button } from "src/assets/styles/utils";
 import styled from "styled-components";
+import { Button } from "../../../assets/styles/utlis";
 
-export const StyledRegister = styled.div`
+export const StyleRegister = styled.div`
   background-color: rgb(238, 77, 45);
   min-width: max-content;
 `;
@@ -19,29 +19,29 @@ export const Banner = styled.div`
   background-position: left center;
 `;
 
-export const FormWrapper = styled.div`
+export const FromWrapper = styled.div`
   flex: 0 0 50%;
   max-width: 50%;
   box-shadow: 0 3px 10px 0 rgba(0 0 0 / 14%);
-  border-radius: 0%.4rem;
+  border-radius: 0% 4rem;
   background-color: #fff;
   padding: 3.5rem 3rem 5rem;
 `;
 
-export const FormTitle = styled.div`
+export const FromTitle = styled.div`
   font-size: 20px;
   margin-bottom: 3rem;
   color: #222;
   text-transform: capitalize;
 `;
 
-export const Form = styled.form``;
+export const From = styled.form``;
 
 export const FormControl = styled.div`
   margin-bottom: 2.5rem;
 `;
 
-export const FormButton = styled.div`
+export const FromButton = styled.div`
   margin-bottom: 3rem;
   ${Button} {
     width: 100%;
