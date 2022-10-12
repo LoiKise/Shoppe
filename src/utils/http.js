@@ -45,13 +45,16 @@ class Http {
   get(url, config = null) {
     return this.instance.get(url, config);
   }
-  potst(url, data, config = null) {
+
+  post(url, data, config = null) {
     return this.instance.post(url, data, config);
   }
+
   put(url, data, config = null) {
     return this.instance.put(url, data, config);
   }
-  delete(url, config = null) {
+
+  delete(url, data, config = null) {
     return this.instance.delete(url, {
       data,
       ...config,

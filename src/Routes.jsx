@@ -1,12 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
 import { path } from "./constants/path";
 import RegisterLayout from "./layouts/RegisterLayout/RegisterLayout";
+import Login from "./pages/Auth/Login/Login";
 import Register from "./pages/Auth/Register/Register";
 
 export default function Routess() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route
           path={path.register}
@@ -16,6 +22,15 @@ export default function Routess() {
           }
         />
       </Routes>
-    </Router>
+      <Routes>
+        <Route
+          path={path.login}
+          exact
+          element={
+            <RegisterLayout title="Đăng nhập">{<Login />}</RegisterLayout>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }

@@ -20,7 +20,7 @@ export default function Header({ title }) {
           <S.HeaderTitle>{title}</S.HeaderTitle>
         </S.HeaderBrand>
         <Link to="" className="link">
-          Cần trợ giúp
+          Cần trợ giúp liên hệ anh Tuấn Minh Nguyễn EMB
         </Link>
       </S.Container>
     </S.Header>
