@@ -8,7 +8,7 @@ import { rules } from "../../../constants/rules.js";
 import ErrorMessage from "../../../components/ErrorMessage/ErrorMessage.jsx";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { register } from "../auth.slice.js";
+import { login } from "../auth.slice.js";
 import { unwrapResult } from "@reduxjs/toolkit";
 import { path } from "../../../constants/path.js";
 
@@ -25,15 +25,32 @@ export default function Login() {
   } = useForm({
     defaultValues: {
       email: "",
-      passWord: "",
+      password: "",
     },
   });
 
   const handleLogin = async (data) => {
     const body = {
       email: data.email,
-      password: data.passWord,
+      password: data.password,
     };
+    try {
+      const res = await dispatch(login(body));
+      console.log("res", res);
+      unwrapResult(res);
+      navigate(path.home);
+    } catch (error) {
+      console.log("errr", error);
+      if (error.status === 422) {
+        console.log("key", error.data.message);
+        for (const key in error.data) {
+          setError(key, {
+            type: "server",
+            message: error.data[key],
+          });
+        }
+      }
+    }
   };
 
   return (
@@ -42,7 +59,7 @@ export default function Login() {
         <S.Container className="container">
           <S.Banner></S.Banner>
           <S.FromWrapper>
-            <S.FromTitle>Đăng nhập</S.FromTitle>
+            <S.FromTitle>Đăng ký</S.FromTitle>
             <S.From noValidate onSubmit={handleSubmit(handleLogin)}>
               <S.FormControl>
                 <Controller
@@ -63,20 +80,20 @@ export default function Login() {
               </S.FormControl>
               <S.FormControl>
                 <Controller
-                  name="passWord"
+                  name="password"
                   control={control}
                   rules={rules.passWord}
                   render={({ field }) => (
                     <InputPassword
                       type="passWord"
-                      name="passWord"
+                      name="password"
                       placeholder="Mật khẩu"
                       onChange={field.onChange}
-                      value={getValues("passWord")}
+                      value={getValues("password")}
                     />
                   )}
                 />
-                <ErrorMessage errors={errors} name="passWord" />
+                <ErrorMessage errors={errors} name="password" />
               </S.FormControl>
               <S.FromButton>
                 <Button type="submit">Đăng nhập</Button>
