@@ -1,11 +1,11 @@
 import React from "react";
+import Header from "../../components/Header/Header";
 import Footer from "../../components/FooterRegister/Footer";
-import Header from "../../components/HeaderRegister/Header";
 
-export default function RegisterLayout({ children, title }) {
+export default function MainLayout({ children }) {
   return (
     <div>
-      <Header title={title}></Header>
+      <Header />
       {children}
       <Footer />
     </div>
