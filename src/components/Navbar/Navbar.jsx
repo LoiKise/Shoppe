@@ -18,7 +18,7 @@ export default function Navbar() {
         {authenticated && (
           <li>
             <S.User onMouseEnter={showPopover} onMouseLeave={hidePopover}>
-              <S.UserImage src="https://cf.shopee.vn/file/b8011e4a0e4ca10f909bd30ec0ed2c5c_tn" />
+              <S.UserImage src="https://picsum.photos/200" />
               <S.UserName>{profile.name || profile.email}</S.UserName>
               <Popover active={activePopover}>
                 <S.UserLink to={path.user}>Tài khoản của tôi</S.UserLink>
