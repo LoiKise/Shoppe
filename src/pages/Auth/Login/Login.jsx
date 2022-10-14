@@ -59,7 +59,7 @@ export default function Login() {
         <S.Container className="container">
           <S.Banner></S.Banner>
           <S.FromWrapper>
-            <S.FromTitle>Đăng ký</S.FromTitle>
+            <S.FromTitle>Đăng nhập</S.FromTitle>
             <S.From noValidate onSubmit={handleSubmit(handleLogin)}>
               <S.FormControl>
                 <Controller
