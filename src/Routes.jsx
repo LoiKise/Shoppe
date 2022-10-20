@@ -13,6 +13,7 @@ import RegisterLayout from "./layouts/RegisterLayout/RegisterLayout";
 import Login from "./pages/Auth/Login/Login";
 import Register from "./pages/Auth/Register/Register";
 import Home from "./pages/Home/Home";
+import NotFound from "./pages/NotFound/NotFound";
 import User from "./pages/User/User";
 
 export default function Routess() {
@@ -27,8 +28,6 @@ export default function Routess() {
             </UnauthenticatedGuards>
           }
         />
-      </Routes>
-      <Routes>
         <Route
           path={path.login}
           element={
@@ -37,12 +36,6 @@ export default function Routess() {
             </UnauthenticatedGuards>
           }
         />
-      </Routes>
-
-      <Routes>
-        <Route path={path.home} element={<MainLayout>{<Home />}</MainLayout>} />
-      </Routes>
-      <Routes>
         <Route
           path={path.user}
           element={
@@ -51,6 +44,8 @@ export default function Routess() {
             </AuthenticatedGuards>
           }
         />
+        <Route path={path.notFound} element={<NotFound />} />
+        <Route path={path.home} element={<MainLayout>{<Home />}</MainLayout>} />
       </Routes>
     </BrowserRouter>
   );
