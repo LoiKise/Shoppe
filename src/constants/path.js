@@ -3,4 +3,5 @@ export const path = {
   register: "/register",
   login: "/login",
   user: "/user",
+  notFound: "*",
 };

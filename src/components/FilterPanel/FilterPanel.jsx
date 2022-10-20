@@ -1,10 +1,21 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import {
+  useMatch,
+  useResolvedPath,
+  NavLink,
+  useLocation,
+} from "react-router-dom";
 import { path } from "../../constants/path";
 import RatingStart from "../RatingStar/RatingStart";
 import * as S from "./filterpanel.style";
+import PropTypes from "prop-types";
+import CustomLink from "../../utils/isActive";
+import qs from "query-string";
 
-export default function FilterPanel() {
+export default function FilterPanel({ categories }) {
+  const location = useLocation();
+  const query = qs.parse(location.search);
+
   return (
     <div>
       <S.CategoryTitleLink to={path.home}>
@@ -27,15 +38,16 @@ export default function FilterPanel() {
         Tất cả danh mục
       </S.CategoryTitleLink>
       <S.CategoryList>
-        <S.CategoryItem>
-          <NavLink to="">Quần Áo</NavLink>
-        </S.CategoryItem>
-        <S.CategoryItem>
-          <NavLink to="">Quần Áo</NavLink>
-        </S.CategoryItem>
-        <S.CategoryItem>
-          <NavLink to="">Quần Áo</NavLink>
-        </S.CategoryItem>
+        {categories.map((category) => (
+          <S.CategoryItem key={category._id}>
+            <NavLink
+              to={path.home + `?category=${category._id}`}
+              style={query.category === category._id ? { color: "red" } : {}}
+            >
+              {category.name}
+            </NavLink>
+          </S.CategoryItem>
+        ))}
       </S.CategoryList>
       <S.CategoryTitle>
         <svg
@@ -79,3 +91,7 @@ export default function FilterPanel() {
     </div>
   );
 }
+
+FilterPanel.propTypes = {
+  categories: PropTypes.array.isRequired,
+};

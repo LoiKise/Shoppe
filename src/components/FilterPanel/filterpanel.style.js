@@ -24,13 +24,13 @@ export const CategoryItem = styled.li`
   padding: 8px 12px 10px;
   display: flex;
   align-items: center;
-
   a {
     color: rgba(0, 0, 0, 0.8);
-    &.active {
+    /* .active {
       font-weight: 700;
       color: #ee4d2d;
-    }
+      font-size: 20px;
+    } */
   }
 `;
 export const CategoryTitle = styled.div`
