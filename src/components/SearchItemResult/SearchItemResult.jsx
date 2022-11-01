@@ -133,7 +133,7 @@ export default function SearchItemResult({ products, filters }) {
         </S.ProductList>
       )}
 
-      <Pagination />
+      <Pagination pagination={pagination} filters={filters} />
     </div>
   );
 }
