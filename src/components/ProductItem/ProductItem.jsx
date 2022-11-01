@@ -3,25 +3,31 @@ import { Link } from "react-router-dom";
 import ProductRating from "../ProductRating/ProductRating";
 import * as S from "./productItem.style";
 import PropTypes from "prop-types";
+import { path } from "../../constants/path";
+import { formatK, formatMoney, generateNameId } from "../../utils/helper";
 
-export default function ProductItem() {
+export default function ProductItem({ product }) {
   return (
     <S.Product>
-      <Link to="">
+      <Link to={path.product + `/${generateNameId(product)}`}>
         <S.ProductItem>
           <S.ProductItemImage>
-            <img src="alll" alt="ss" />
+            <img src={product.image} alt={product.image} />
           </S.ProductItemImage>
           <S.ProductItemInfo>
-            <S.ProductItemTitle>Iphone 14</S.ProductItemTitle>
+            <S.ProductItemTitle>{product.name}</S.ProductItemTitle>
             <S.ProductItemPrice>
-              <S.ProductItemPriceOriginal>34000000đ</S.ProductItemPriceOriginal>
-              <S.ProductItemPriceSale>33000000đ</S.ProductItemPriceSale>
+              <S.ProductItemPriceOriginal>
+                {formatMoney(product.price_before_discount)}
+              </S.ProductItemPriceOriginal>
+              <S.ProductItemPriceSale>
+                {formatMoney(product.price)}
+              </S.ProductItemPriceSale>
             </S.ProductItemPrice>
             <S.ProductItemMeta>
-              <ProductRating />
+              <ProductRating rating={product.rating} />
               <S.ProductItemSold>
-                <span>1000</span>
+                <span>{formatK(product.sold)}</span>
                 <span>Đã bán</span>
               </S.ProductItemSold>
             </S.ProductItemMeta>

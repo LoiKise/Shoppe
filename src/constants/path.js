@@ -4,4 +4,5 @@ export const path = {
   login: "/login",
   user: "/user",
   notFound: "*",
+  product: "/product",
 };

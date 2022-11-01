@@ -1,7 +1,23 @@
 import React from "react";
 import * as S from "./ratingStart.style";
+import PropTypes from "prop-types";
+import { useHistory, useNavigate } from "react-router";
+import { path } from "../../constants/path";
+import qs from "query-string";
+import classNames from "classnames";
 
-export default function RatingStart() {
+export default function RatingStars({ filters }) {
+  const navigate = useNavigate();
+
+  const searchRating = (rating) => {
+    const _filters = {
+      ...filters,
+      rating,
+    };
+
+    navigate(path.home + `?${qs.stringify(_filters)}`);
+  };
+
   return (
     <div>
       {Array(5)
@@ -10,6 +26,9 @@ export default function RatingStart() {
           <S.RatingStarsContainer
             key={index}
             onClick={() => searchRating(5 - index)}
+            className={classNames({
+              active: Number(filters.rating) === 5 - index,
+            })}
           >
             {Array(5)
               .fill(0)
@@ -92,3 +111,7 @@ export default function RatingStart() {
     </div>
   );
 }
+
+RatingStars.propTypes = {
+  filters: PropTypes.object.isRequired,
+};
