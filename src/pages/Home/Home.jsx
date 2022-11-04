@@ -29,7 +29,7 @@ export default function Home() {
     const _filters = {
       ...query,
       page: query.page || 1,
-      limit: query.limit || 5,
+      limit: query.limit || 10,
       sortBy: query.sortBy || "view",
     };
     setFilters(_filters);
@@ -44,6 +44,7 @@ export default function Home() {
       price_min: _filters.minPrice,
       sort_by: _filters.sortBy,
       order: _filters.order,
+      name: _filters.name,
     };
 
     const _getProducts = async () => {
