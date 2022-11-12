@@ -15,6 +15,7 @@ import Register from "./pages/Auth/Register/Register";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
 import User from "./pages/User/User";
+import ProductDetail from "./pages/ProductDetail/ProductDetail";
 
 export default function Routess() {
   return (
@@ -44,8 +45,13 @@ export default function Routess() {
             </AuthenticatedGuards>
           }
         />
+
         <Route path={path.notFound} element={<NotFound />} />
         <Route path={path.home} element={<MainLayout>{<Home />}</MainLayout>} />
+        <Route
+          path={path.productDetail}
+          element={<MainLayout>{<ProductDetail />}</MainLayout>}
+        />
       </Routes>
     </BrowserRouter>
   );
