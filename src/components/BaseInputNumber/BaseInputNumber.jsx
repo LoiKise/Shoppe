@@ -6,7 +6,6 @@ export default function BaseInputNumber({ onChange, value, ...props }) {
     const val = event.target.value;
     if ((/^\d+$/.test(val) || val === "") && onChange) {
       onChange(val);
-      console.log("nhập số ");
     }
   };
   return <input type="text" onChange={handleChange} value={value} {...props} />;
