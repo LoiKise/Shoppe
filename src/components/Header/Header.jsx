@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { path } from "../../constants/path";
 import usePopover from "../../hooks/usePopover";
 import useQuery from "../../hooks/useQuery";
+import { formatMoney } from "../../utils/helper";
 import Navbar from "../Navbar/Navbar";
 import Popover from "../Popover/Popover";
 import * as S from "./header.style.js";
@@ -13,10 +15,12 @@ export default function Header() {
   const [searchValue, setSearchValue] = useState("");
   const navigate = useNavigate();
   const query = useQuery();
-  console.log("🚀 ~ file: Header.jsx ~ line 14 ~ Header ~ query", query);
   const onChangeSearch = (event) => {
     setSearchValue(event.target.value);
   };
+
+  const purchases = useSelector((state) => state.cart.purchases);
+  console.log("🚀 ~ file: Header.jsx ~ line 22 ~ Header ~ purchase", purchases);
 
   useEffect(() => {
     const { name = "" } = query;
@@ -88,21 +92,29 @@ export default function Header() {
                   <circle cx="10.7" cy={23} r="2.2" stroke="none" />
                   <circle cx="19.7" cy={23} r="2.2" stroke="none" />
                 </svg>
-                <S.CartNumberBage>8</S.CartNumberBage>
+                {purchases.length > 0 && (
+                  <S.CartNumberBage>{purchases.length}</S.CartNumberBage>
+                )}
               </S.CartIcon>
               <Popover active={activePopover}>
                 <S.PopoverContent>
                   <S.PopoverTitle>Sản phẩm mới thêm</S.PopoverTitle>
-                  <S.MiniProductCart>
-                    <S.MiniProductCartImg src="https://picsum.photos/200" />
-                    <S.MiniProductCartTitle>
-                      Ngâm Thảo mộc
-                    </S.MiniProductCartTitle>
-                    <S.MiniProductCartPrice>70đ</S.MiniProductCartPrice>
-                  </S.MiniProductCart>
+                  {purchases.slice(0, 5).map((purchase) => (
+                    <S.MiniProductCart key={purchase._id}>
+                      <S.MiniProductCartImg src={purchase.product.image} />
+                      <S.MiniProductCartTitle>
+                        {purchase.product.name}
+                      </S.MiniProductCartTitle>
+                      <S.MiniProductCartPrice>
+                        đ{formatMoney(purchase.product.price)}
+                      </S.MiniProductCartPrice>
+                    </S.MiniProductCart>
+                  ))}
                   <S.PopoverFooter>
                     <S.MoreProduct>
-                      <span>sản phẩm giỏ hàng </span>
+                      {purchases.length > 5 && (
+                        <span>{purchases.length - 5} sản phẩm giỏ hàng </span>
+                      )}
                     </S.MoreProduct>
                     <S.ButtonShowCart>Xem giỏ hàng</S.ButtonShowCart>
                   </S.PopoverFooter>
