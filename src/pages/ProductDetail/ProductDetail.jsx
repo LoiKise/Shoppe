@@ -15,17 +15,13 @@ import ProductRating from "../../components/ProductRating/ProductRating";
 import ProductQuantityController from "../../components/ProductQuantityController/ProductQuantityController";
 import DOMPurify from "dompurify";
 import { toast } from "react-toastify";
+import { getCartPurchases } from "../Cart/cart.slice";
 
 export default function ProductDetail() {
   const [product, setProduct] = useState();
-
   const [currentImage, setCurrentImage] = useState({});
   const [currentIndexImages, setCurrentIndexImages] = useState([0, 5]);
   const [quantity, setQuantity] = useState(1);
-  console.log(
-    "🚀 ~ file: ProductDetail.jsx ~ line 23 ~ ProductDetail ~ quantity",
-    quantity
-  );
 
   const currenImages = useMemo(() => {
     if (product) {
@@ -39,7 +35,6 @@ export default function ProductDetail() {
 
   useEffect(() => {
     const realId = getIdFromNameId(idProduct);
-
     dispatch(getProductDetail(realId))
       .then(unwrapResult)
       .then((res) => {
@@ -80,19 +75,17 @@ export default function ProductDetail() {
     setQuantity(value);
   };
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     const body = {
       product_id: product._id,
       buy_count: quantity,
     };
-    dispatch(addToCart(body))
-      .then(unwrapResult)
-      .then((res) => {
-        toast.success(res.message, {
-          position: "top-center",
-          autoClose: "3000",
-        });
-      });
+    const res = await dispatch(addToCart(body)).then(unwrapResult);
+    await dispatch(getCartPurchases()).then(unwrapResult);
+    toast.success(res.message, {
+      position: "top-center",
+      autoClose: "3000",
+    });
   };
 
   return (
