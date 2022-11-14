@@ -37,7 +37,6 @@ export default function Register() {
     };
     try {
       const res = await dispatch(register(body));
-      console.log("res", res);
       unwrapResult(res);
       navigate(path.home);
     } catch (error) {
