@@ -19,40 +19,38 @@ import ProductDetail from "./pages/ProductDetail/ProductDetail";
 
 export default function Routess() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path={path.register}
-          element={
-            <UnauthenticatedGuards>
-              <RegisterLayout title="Đăng ký">{<Register />}</RegisterLayout>
-            </UnauthenticatedGuards>
-          }
-        />
-        <Route
-          path={path.login}
-          element={
-            <UnauthenticatedGuards>
-              <RegisterLayout title="Đăng nhập">{<Login />}</RegisterLayout>
-            </UnauthenticatedGuards>
-          }
-        />
-        <Route
-          path={path.user}
-          element={
-            <AuthenticatedGuards>
-              <MainLayout>{<User />}</MainLayout>
-            </AuthenticatedGuards>
-          }
-        />
+    <Routes>
+      <Route
+        path={path.register}
+        element={
+          <UnauthenticatedGuards>
+            <RegisterLayout title="Đăng ký">{<Register />}</RegisterLayout>
+          </UnauthenticatedGuards>
+        }
+      />
+      <Route
+        path={path.login}
+        element={
+          <UnauthenticatedGuards>
+            <RegisterLayout title="Đăng nhập">{<Login />}</RegisterLayout>
+          </UnauthenticatedGuards>
+        }
+      />
+      <Route
+        path={path.user}
+        element={
+          <AuthenticatedGuards>
+            <MainLayout>{<User />}</MainLayout>
+          </AuthenticatedGuards>
+        }
+      />
 
-        <Route path={path.notFound} element={<NotFound />} />
-        <Route path={path.home} element={<MainLayout>{<Home />}</MainLayout>} />
-        <Route
-          path={path.productDetail}
-          element={<MainLayout>{<ProductDetail />}</MainLayout>}
-        />
-      </Routes>
-    </BrowserRouter>
+      <Route path={path.notFound} element={<NotFound />} />
+      <Route path={path.home} element={<MainLayout>{<Home />}</MainLayout>} />
+      <Route
+        path={path.productDetail}
+        element={<MainLayout>{<ProductDetail />}</MainLayout>}
+      />
+    </Routes>
   );
 }
